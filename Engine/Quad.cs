@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Drawing;
 using Microsoft.DirectX;
 using Microsoft.DirectX.Direct3D;
@@ -15,7 +15,7 @@ namespace GameEngine
         private Quad            m_SouthEast = null;
         private Quad            m_Parent    = null;
         private int             m_nLevel;
-        private SortedList      m_Objects;
+        private SortedList   m_Objects;
         private float           m_fRadius;
         private Vector3         m_vPosition;
         private string          m_sName;
@@ -234,7 +234,7 @@ namespace GameEngine
                                 cam.AddVisibleObject(obj);
                             }
                             break;
-                        case Camera.CullState.AllOutside:
+                        case Camera.CullState.AllOutSide:
                             if (m_Parent == null) // i.e, if this is the root quad
                             {
                                 goto case Camera.CullState.PartiallyIn;
