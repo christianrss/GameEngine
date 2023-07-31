@@ -9,9 +9,6 @@ using System.Threading.Tasks;
 
 namespace GameEngine
 {
-    internal class Camera
-    {
-    }
 
     /// <summary>
     /// Summary description for Camera.
