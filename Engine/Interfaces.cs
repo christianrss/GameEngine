@@ -1,7 +1,6 @@
 ﻿using System;
 using GameEngine;
 using Microsoft.DirectX;
-using static GameEngine.GameEngine;
 
 namespace GameEngine
 {

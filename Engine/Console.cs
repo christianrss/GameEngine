@@ -20,7 +20,7 @@ namespace GameEngine
         private static bool m_bOpening = false;
         private static bool m_bClosing = false;
         private static ArrayList m_Entries = new ArrayList();
-        private static SortedList m_Commands = SortedList();
+        private static SortedList m_Commands = new SortedList();
         private static SortedList m_Parameters = new SortedList();
         private static GraphicsFont m_pFont = null; // font for screen text rendering
         private static StringBuilder m_Entryline = new StringBuilder();

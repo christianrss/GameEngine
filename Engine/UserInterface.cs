@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Collections;
 using Microsoft.DirectX;
 using Microsoft.DirectX.Direct3D;
-using Microsoft.SqlServer.Server;
 
 namespace GameEngine
 {
@@ -106,8 +105,10 @@ namespace GameEngine
             m_Rect.Y += m_Y;
             m_Function = pFunc;
 
+
             m_vb = new VertexBuffer(
                 typeof(CustomVertex.TransformedTextured),
+                4,
                 CGameEngine.Device3D,
                 Usage.WriteOnly,
                 CustomVertex.TransformedTextured.Format,
@@ -257,8 +258,10 @@ namespace GameEngine
             image = new Image(filename);
             m_StartTime = DXUtil.Timer(TIMER.GETABSOLUTETIME);
             m_EndTime = m_StartTime + nDuration;
+          
             m_vb = new VertexBuffer(
                 typeof(CustomVertex.TransformedTextured),
+                4,
                 CGameEngine.Device3D,
                 Usage.WriteOnly,
                 CustomVertex.TransformedTextured.Format,
