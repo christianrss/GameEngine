@@ -51,6 +51,7 @@
     <Compile Include="Math.cs" />
     <Compile Include="Object3D.cs" />
     <Compile Include="Quad.cs" />
+    <Compile Include="SkyBox.cs" />
     <Compile Include="Terrain.cs" />
     <Compile Include="UserInterface.cs" />
   </ItemGroup>
