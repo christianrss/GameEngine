@@ -335,10 +335,10 @@ namespace GameEngine
                             map.action(m_joystick.X);
                             break;
                         case 4:
-                            map.action(m_joystick.Y);
+                            map.action(m_joystick.X);
                             break;
                         case 5:
-                            map.action(m_joystick.Z);
+                            map.action(m_joystick.X);
                             break;
                     }
                 }

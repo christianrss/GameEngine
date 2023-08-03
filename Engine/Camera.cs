@@ -1,11 +1,7 @@
-﻿using Microsoft.DirectX;
-using System;
+﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.DirectX;
+using Microsoft.DirectX.Direct3D;
 
 namespace GameEngine
 {
@@ -29,7 +25,7 @@ namespace GameEngine
             /// <summary>
             /// The rectangle is completely outisde the viewing Frustrum
             /// </summary>
-            AllOutSide,
+            AllOutside,
             /// <summary>
             /// The rectangle is partially within the viewing Frustrum
             /// </summary>
@@ -221,7 +217,7 @@ namespace GameEngine
                 distance = planeFrustum[iPlane].Dot(pos);
                 if (distance <= -radius)
                 {
-                    return CullState.AllOutSide;
+                    return CullState.AllOutside;
                 }
                 if (distance > radius) count++;
             }
@@ -240,7 +236,7 @@ namespace GameEngine
                 distance = planeFrustum[iPlane].Dot(obj.Position);
                 if (distance <= -obj.Radius)
                 {
-                    return CullState.AllOutSide;
+                    return CullState.AllOutside;
                 }
                 if (distance > obj.Radius) count++;
             }
@@ -323,10 +319,10 @@ namespace GameEngine
                 vecFrustum[1] = new Vector3( 1.0f, -1.0f, 0.0f); // Xyz
                 vecFrustum[2] = new Vector3(-1.0f,  1.0f, 0.0f); // xYz
                 vecFrustum[3] = new Vector3( 1.0f,  1.0f, 0.0f); // XYz
-                vecFrustum[4] = new Vector3(-1.0f,  1.0f, 1.0f); // xyZ
+                vecFrustum[4] = new Vector3(-1.0f, -1.0f, 1.0f); // xyZ
                 vecFrustum[5] = new Vector3( 1.0f, -1.0f, 1.0f); // XyZ
                 vecFrustum[6] = new Vector3(-1.0f,  1.0f, 1.0f); // xYZ
-                vecFrustum[7] = new Vector3( 1.0f, 1.0f, 1.0f); // XYZ
+                vecFrustum[7] = new Vector3( 1.0f,  1.0f, 1.0f); // XYZ
 
                 for (int i = 0; i < 8; i++)
                     vecFrustum[i] = Vector3.TransformCoordinate(vecFrustum[i], mat);

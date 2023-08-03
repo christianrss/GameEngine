@@ -89,11 +89,11 @@ namespace GameEngine
 
                 }
             }
-            /*for (int i = 0; i < BillBoard.Objects.Count; i++)
+            for (int i = 0; i < BillBoard.Objects.Count; i++)
             {
                 Object3D obj = (Object3D)BillBoard.Objects[i];
                 obj.Dispose();
-            }*/
+            }
         }
 
         public void RestoreSurfaces()
@@ -117,7 +117,7 @@ namespace GameEngine
         /// Initial setup of the Game Engine
         /// </summary>
         /// <param name="="pd3dDevice"></param>
-        public async void Initialize ( System.Windows.Forms.Form form, Microsoft.DirectX.Direct3D.Device pd3dDevice)
+        public async void Initialize (System.Windows.Forms.Form form, Microsoft.DirectX.Direct3D.Device pd3dDevice)
         {
             // capture a reference to the window handle
             m_WinForm = form;
@@ -228,7 +228,7 @@ namespace GameEngine
                 m_Terrain.Render(m_Camera);
             }
 
-            //BillBoard.RenderAll(m_Camera);
+            BillBoard.RenderAll(m_Camera);
 
             foreach (Object3D obj in m_Objects)
             {
@@ -242,7 +242,7 @@ namespace GameEngine
         /// <summary>
         /// Process mouse, keyboard and if appropriate, joystick inputs
         /// </summary>
-        public void GetPlayersInputs()
+        public void GetPlayerInputs()
         {
             m_GameInput.Poll();
         }
@@ -267,11 +267,15 @@ namespace GameEngine
                 frame++;
                 if (frame > 30)
                 {
-                    bool los = m_Terrain.InLineOfSight(
-                        new Vector3(0.0f, 1.0f, 0.0f),
-                        m_Camera.EyeVector
-                    );
-                    frame = 0;
+                    if (m_Terrain != null)
+                    {
+                        bool los = m_Terrain.InLineOfSight(
+                            new Vector3(0.0f, 1.0f, 0.0f),
+                            m_Camera.EyeVector
+                        );
+                        frame = 0;
+                        Console.AddLine("los = " + los);
+                    }
                 }
                 if (m_Objects.Count > 0)
                 {
@@ -326,13 +330,13 @@ namespace GameEngine
             }
             if (obj == null)
             {
-                /*foreach (Object3D o in BillBoard.Objects)
+                foreach (Object3D o in BillBoard.Objects)
                 {
                     if (o.Name == name)
                     {
                         obj = o;
                     }
-                }*/
+                }
             }
             return obj;
         }

@@ -58,7 +58,7 @@ namespace GameEngine
             m_Corners[3].X = p2.X; //ne
             m_Corners[3].Y = p2.Y;
             m_Corners[3].Z = p2.Z;
-            m_Corners[3].Tu = 1.0F;
+            m_Corners[3].Tu = 1.0f;
             m_Corners[3].Tv = 0.0f;
 
             m_vPosition.X = (p4.X + p3.X) / 2.0f;
@@ -145,7 +145,7 @@ namespace GameEngine
             {
                 for (int i = 0; i < 6; i++)
                 {
-                    vertices[Offset + 1] = m_Corners[i];
+                    vertices[Offset + i] = m_Corners[i];
                 }
                 newOffset += 6;
                 Culled = true;
@@ -195,6 +195,7 @@ namespace GameEngine
             m_ySize = ySize - 1;
             m_Quads = new TerrainQuad[m_xSize, m_ySize];
             m_Vertices = new CustomVertex.PositionNormalTextured[3000];
+            m_Spacing = fSpacing;
 
             try
             {
@@ -213,13 +214,13 @@ namespace GameEngine
             }
             catch (DirectXException d3de)
             {
-                // Console.AddLine("Unable to load terrain heightmap " + sName);
-                // Console.AddLine(d3de.ErrorString);
+                Console.AddLine("Unable to load terrain heightmap " + sName);
+                Console.AddLine(d3de.ErrorString);
             }
             catch(Exception e)
             {
-                //Console.AddLine("Unable to load terrain heightmap " + sName);
-                // Console.AddLine(e.Message);
+                Console.AddLine("Unable to load terrain heightmap " + sName);
+                Console.AddLine(e.Message);
             }
             try
             {
@@ -239,37 +240,49 @@ namespace GameEngine
 
                     }
                 }
-                //Console.AddLine("Done creating quads");
+                Console.AddLine("Done creating quads");
             }
             catch (DirectXException d3de)
             {
-                //Console.AddLine("Unable to create quads.");
-                //Console.AddLine(d3de.ErrorString);
+                Console.AddLine("Unable to create quads.");
+                Console.AddLine(d3de.ErrorString);
             }
             catch (Exception e)
             {
-                //Console.AddLine("Unable to create quads.");
-                //Console.AddLine(e.Message);
+                Console.AddLine("Unable to create quads.");
+                Console.AddLine(e.Message);
             }
             for (int i = 1; i < m_xSize-1; i++)
             {
-                for (int j = 1; j < m_ySize; j++)
+                for (int j = 1; j < m_ySize-1; j++)
                 {
                     // Assign normals to each vertex
-                    Vector3 Normalsw = m_Quads[i, j].FaceNormals + m_Quads[i - 1, j - 1].FaceNormals +
-                        m_Quads[i - 1, j].FaceNormals + m_Quads[i, j - 1].FaceNormals;
+                    Vector3 Normalsw =
+                        m_Quads[i, j].FaceNormals +
+                        m_Quads[i - 1, j - 1].FaceNormals +
+                        m_Quads[i - 1, j].FaceNormals +
+                        m_Quads[i, j - 1].FaceNormals;
                     m_Quads[i,j].SetCornerNormal(0,Normalsw);
 
-                    Vector3 Normalse = m_Quads[i, j].FaceNormals + m_Quads[i, j - 1].FaceNormals +
-                        m_Quads[i + 1, j].FaceNormals + m_Quads[i + 1, j - 1].FaceNormals;
+                    Vector3 Normalse =
+                        m_Quads[i, j].FaceNormals +
+                        m_Quads[i, j - 1].FaceNormals +
+                        m_Quads[i + 1, j].FaceNormals + 
+                        m_Quads[i + 1, j - 1].FaceNormals;
                     m_Quads[i, j].SetCornerNormal(1, Normalse);
 
-                    Vector3 Normalnw = m_Quads[i, j].FaceNormals + m_Quads[i - 1, j].FaceNormals +
-                        m_Quads[i - 1, j + 1].FaceNormals + m_Quads[i, j + 1].FaceNormals;
+                    Vector3 Normalnw =
+                        m_Quads[i, j].FaceNormals + 
+                        m_Quads[i - 1, j].FaceNormals +
+                        m_Quads[i - 1, j + 1].FaceNormals + 
+                        m_Quads[i, j + 1].FaceNormals;
                     m_Quads[i, j].SetCornerNormal(2, Normalnw);
 
-                    Vector3 Normalne = m_Quads[i, j].FaceNormals + m_Quads[i, j + 1].FaceNormals +
-                        m_Quads[i + 1, j + 1].FaceNormals + m_Quads[i + 1, j].FaceNormals;
+                    Vector3 Normalne =
+                        m_Quads[i, j].FaceNormals + 
+                        m_Quads[i, j + 1].FaceNormals +
+                        m_Quads[i + 1, j + 1].FaceNormals + 
+                        m_Quads[i + 1, j].FaceNormals;
                     m_Quads[i, j].SetCornerNormal(3, Normalne);
                 }
             }
@@ -280,22 +293,28 @@ namespace GameEngine
             }
             catch
             {
-                //Console.AddLine("Unable to create terrain texture using " + sTexture);
+                Console.AddLine("Unable to create terrain texture using " + sTexture);
             }
 
             try
             {
                 // Create a vertex buffer for rendering the terrain
-                m_VB = new VertexBuffer(typeof(CustomVertex.PositionNormalTextured), 3000, CGameEngine.Device3D,
-                    Usage.WriteOnly, CustomVertex.PositionNormalTextured.Format, Pool.Default);
+                m_VB = new VertexBuffer(
+                    typeof(CustomVertex.PositionNormalTextured),
+                    3000,
+                    CGameEngine.Device3D,
+                    Usage.WriteOnly,
+                    CustomVertex.PositionNormalTextured.Format,
+                    Pool.Default
+                );
                 m_bValid = true;
             }
             catch
             {
-                // Console.AddLine("Unable to create terrain vertex buffer");
+                Console.AddLine("Unable to create terrain vertex buffer");
             }
 
-            //Console.AddLine("terrain loaded");
+            Console.AddLine("terrain loaded");
 
         }
 
@@ -316,9 +335,17 @@ namespace GameEngine
 
             float dx = (east - x1 * m_Spacing) / m_Spacing;
             float dy = (north - z1 * m_Spacing) / m_Spacing;
-            height = m_Elevations[x1,z1].Y + dx * (m_Elevations[x2,z1].Y - m_Elevations[x1,z1].Y) +
-                dy * (m_Elevations[x1,z2].Y - m_Elevations[x1,z1].Y) +
-                dx * dy * (m_Elevations[x1, z1].Y - m_Elevations[x2, z1].Y - m_Elevations[x1, z2].Y + m_Elevations[x2, z2].Y);
+            height =
+                m_Elevations[x1, z1].Y +
+                dx * (m_Elevations[x2, z1].Y - m_Elevations[x1, z1].Y) +
+                dy * (m_Elevations[x1, z2].Y - m_Elevations[x1, z1].Y) +
+                dx *
+                dy * (
+                    m_Elevations[x1, z1].Y -
+                    m_Elevations[x2, z1].Y -
+                    m_Elevations[x1, z2].Y +
+                    m_Elevations[x2, z2].Y
+                );
                      
             return height;
         }
@@ -390,7 +417,7 @@ namespace GameEngine
             }
             if (attitude.Pitch > (Math.PI/4.0) || attitude.Pitch < -(Math.PI/4.0))
             {
-                // Console.AddLine("Pitch " + attitude.Pitch*180.0/Math.PI + " " + normal.ToString());
+                Console.AddLine("Pitch " + attitude.Pitch*180.0/Math.PI + " " + normal.ToString());
             }
 
             if (normal.X == 0.0f)
@@ -411,7 +438,7 @@ namespace GameEngine
             }
             if (attitude.Roll > (Math.PI/4.0) || attitude.Roll < - (Math.PI/4.0))
             {
-                //Console.AddLine("Roll " + attitude.Roll * 180.0 / Math.PI + " " + normal.ToString());
+                Console.AddLine("Roll " + attitude.Roll * 180.0 / Math.PI + " " + normal.ToString());
             }
 
             attitude.Heading = Heading;
@@ -461,7 +488,7 @@ namespace GameEngine
                         }
                         catch
                         {
-                            // Console.AddLine("Error rendering terrain quad " + i + "," + j);
+                            Console.AddLine("Error rendering terrain quad " + i + "," + j);
                         }
                     }
                 }
@@ -479,13 +506,13 @@ namespace GameEngine
                     }
                     catch (Direct3DXException d3de)
                     {
-                        // Console.AddLine("Unable to render terrain");
-                        // Console.AddLine(d3de.ErrorString);
+                        Console.AddLine("Unable to render terrain");
+                        Console.AddLine(d3de.ErrorString);
                     }
                     catch (Exception e)
                     {
-                        //Console.AddLine("Unable to render terrain");
-                        //Console.AddLine(e.Message);
+                        Console.AddLine("Unable to render terrain");
+                        Console.AddLine(e.Message);
                     }
                 }
 

@@ -5,17 +5,17 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{40D566B9-87C3-485E-B3F3-951513BC911F}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Engine</RootNamespace>
-    <AssemblyName>Engine</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>GameEngine</RootNamespace>
+    <AssemblyName>GameEngine</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,6 +24,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,13 +37,24 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BillBoard.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Console.cs" />
+    <Compile Include="D3DApp.cs" />
+    <Compile Include="D3DEnumeration.cs" />
     <Compile Include="D3DFont.cs" />
+    <Compile Include="D3DSettingsForm.cs" />
     <Compile Include="D3DUtil.cs" />
     <Compile Include="DXUtil.cs" />
     <Compile Include="GameCommand.cs" />
@@ -51,6 +64,9 @@
     <Compile Include="Math.cs" />
     <Compile Include="Object3D.cs" />
     <Compile Include="Quad.cs" />
+    <Compile Include="SelectControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SkyBox.cs" />
     <Compile Include="Terrain.cs" />
     <Compile Include="UserInterface.cs" />

@@ -64,7 +64,7 @@ namespace GameEngine
                     m_Corners[3].Nz = 0.0f;
                     break;
                 case SkyBox.Face.Bottom:
-                    m_Corners[0].X = -100.0f; //nw
+                    m_Corners[0].X = -100.0f; // nw
                     m_Corners[0].Y = -100.0f;
                     m_Corners[0].Z = 100.0f;
                     m_Corners[0].Tu = 0.0f;
@@ -77,10 +77,10 @@ namespace GameEngine
                     m_Corners[1].Z = 100.0f;
                     m_Corners[1].Tu = 1.0f;
                     m_Corners[1].Tv = 1.0f;
-                    m_Corners[1].Nx = 1.0f;
+                    m_Corners[1].Nx = 0.0f;
                     m_Corners[1].Ny = 1.0f;
                     m_Corners[1].Nz = 0.0f;
-                    m_Corners[2].X = -100.0f; //sw
+                    m_Corners[2].X = -100.0f; // sw
                     m_Corners[2].Y = -100.0f;
                     m_Corners[2].Z = -100.0f;
                     m_Corners[2].Tu = 1.0f;
@@ -88,7 +88,7 @@ namespace GameEngine
                     m_Corners[2].Nx = 0.0f;
                     m_Corners[2].Ny = 1.0f;
                     m_Corners[2].Nz = 0.0f;
-                    m_Corners[3].X = 100.0f; //se
+                    m_Corners[3].X = 100.0f; // se
                     m_Corners[3].Y = -100.0f;
                     m_Corners[3].Z = -100.0f;
                     m_Corners[3].Tu = 0.0f;
@@ -106,7 +106,7 @@ namespace GameEngine
                     m_Corners[0].Nx = 0.0f;
                     m_Corners[0].Ny = 0.0f;
                     m_Corners[0].Nz = -1.0f;
-                    m_Corners[1].X = 100.0f; // uper ne
+                    m_Corners[1].X = 100.0f; // upper ne
                     m_Corners[1].Y = 100.0f;
                     m_Corners[1].Z = 100.0f;
                     m_Corners[1].Tu = 1.0f;
@@ -132,7 +132,7 @@ namespace GameEngine
                     m_Corners[3].Nz = -1.0f;
                     break;
                 case SkyBox.Face.Right:
-                    m_Corners[0].X = 100.0f; // upper me
+                    m_Corners[0].X = 100.0f; // upper ne
                     m_Corners[0].Y = 100.0f;
                     m_Corners[0].Z = 100.0f;
                     m_Corners[0].Tu = 0.0f;
@@ -142,7 +142,7 @@ namespace GameEngine
                     m_Corners[0].Nz = 0.0f;
                     m_Corners[1].X = 100.0f; // upper se
                     m_Corners[1].Y = 100.0f;
-                    m_Corners[1].Z = 100.0f;
+                    m_Corners[1].Z = -100.0f;
                     m_Corners[1].Tu = 1.0f;
                     m_Corners[1].Tv = 0.0f;
                     m_Corners[1].Nx = -1.0f;
@@ -180,6 +180,7 @@ namespace GameEngine
                     m_Corners[1].Tu = 1.0f;
                     m_Corners[1].Tv = 0.0f;
                     m_Corners[1].Nx = 0.0f;
+                    m_Corners[1].Ny = 0.0f;
                     m_Corners[1].Nz = -1.0f;
                     m_Corners[2].X = 100.0f; // lower se
                     m_Corners[2].Y = -100.0f;
@@ -187,6 +188,7 @@ namespace GameEngine
                     m_Corners[2].Tu = 0.0f;
                     m_Corners[2].Tv = 1.0f;
                     m_Corners[2].Nx = 0.0f;
+                    m_Corners[2].Ny = 0.0f;
                     m_Corners[2].Nz = -1.0f;
                     m_Corners[3].X = -100.0f; // lower sw
                     m_Corners[3].Y = -100.0f;

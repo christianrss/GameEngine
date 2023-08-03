@@ -177,7 +177,7 @@ namespace GameEngine
                     }
                     catch
                     {
-                        //Console.AddLine("failing while removing object from quad object list");
+                        Console.AddLine("failing while removing object from quad object list");
                     }
                     try
                     {
@@ -188,7 +188,7 @@ namespace GameEngine
                     }
                     catch
                     {
-                        //Console.AddLine("failing while clearing objects quad list");
+                        Console.AddLine("failing while clearing objects quad list");
                     }
                     m_Objects.RemoveAt(nIndex);
                     if (m_NorthEast != null)
@@ -234,7 +234,7 @@ namespace GameEngine
                                 cam.AddVisibleObject(obj);
                             }
                             break;
-                        case Camera.CullState.AllOutSide:
+                        case Camera.CullState.AllOutside:
                             if (m_Parent == null) // i.e, if this is the root quad
                             {
                                 goto case Camera.CullState.PartiallyIn;
@@ -265,14 +265,14 @@ namespace GameEngine
                 }
                 catch (DirectXException d3de)
                 {
-                    //Console.AddLine("Unable to cull object");
-                    //Console.AddLine(d3de.ErrorString);
+                    Console.AddLine("Unable to cull object");
+                    Console.AddLine(d3de.ErrorString);
 
                 }
                 catch (Exception e)
                 {
-                    //Console.AddLine("Unable to cull object");
-                    //Console.AddLine(e.Message);
+                    Console.AddLine("Unable to cull object");
+                    Console.AddLine(e.Message);
                 }
             }
         }
@@ -297,13 +297,13 @@ namespace GameEngine
                         }
                         catch
                         {
-                            // Console.AddLine("invalid quad in object quad list");
+                            Console.AddLine("invalid quad in object quad list");
                         }
                     }
                 }
                 catch
                 {
-                    //Console.AddLine("fails in foreach");
+                    Console.AddLine("fails in foreach");
                 }
 
                 try
@@ -316,18 +316,18 @@ namespace GameEngine
                 }
                 catch
                 {
-                    //Console.AddLine("fails in reset needed");
+                   Console.AddLine("fails in reset needed");
                 }
             }
             catch (DirectXException d3de)
             {
-                //Console.AddLine("Unable to update a Quad " + Name);
-                //Console.AddLine(d3de.ErrorString);
+                Console.AddLine("Unable to update a Quad " + Name);
+                Console.AddLine(d3de.ErrorString);
             }
             catch (Exception e)
             {
-                //Console.AddLine("Unable to update a Quad " + Name);
-                //Console.AddLine(e.Message);
+                Console.AddLine("Unable to update a Quad " + Name);
+                Console.AddLine(e.Message);
             }
         }
 

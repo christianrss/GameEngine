@@ -28,7 +28,7 @@ namespace GameEngine
         protected Vector3 m_vPosition;
         protected Vector3 m_vVelocity;
         protected Attitude m_vOrientation;
-        protected bool m_bVisible;
+        protected bool m_bVisible = true; // visible by default
         protected bool m_bCulled;
         protected bool m_bHasMoved = false;
         protected Object3D m_Parent;
@@ -142,6 +142,11 @@ namespace GameEngine
         public Matrix WorldMatrix
         {
             get { return m_Matrix; }
+        }
+
+        public bool Visible { 
+            get { return m_bVisible; } 
+            set { m_bVisible = value; }
         }
         #endregion
 
